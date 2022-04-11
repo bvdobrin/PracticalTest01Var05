@@ -27,6 +27,8 @@ interface Constants {
     final public static String REMEMBER_ME_CHECKBOX = "rememberMeCheckbox";
 
     final public static String TIMES_PRESSED_TAG         = "TIMES_PRESSED";
+    final public static String TEXT_TAG         = "TEXT_TAG";
+    final public static int  SECONDARY_ACTIVITY_REQUEST_CODE = 0;
     final public static int TIMES_PRESSED = 0;
 
     final public static boolean DEBUG               = true;
@@ -43,8 +45,15 @@ public class PracticalTestVar05MainActivity extends AppCompatActivity {
     private class GenericButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            text.setText(text.getText().toString() + ((Button)view).getText().toString() + ", ");
-            timesPressed++;
+            if (view.getId() == R.id.button) {
+                Intent intent = new Intent(getApplicationContext(), PracticalTest01Var05SecondaryActivity.class);
+                intent.putExtra(Constants.TEXT_TAG, text.getText());
+                startActivity(intent);
+            } else {
+                text.setText(text.getText().toString() + ((Button)view).getText().toString() + ", ");
+                timesPressed++;
+            }
+
         }
     }
 
